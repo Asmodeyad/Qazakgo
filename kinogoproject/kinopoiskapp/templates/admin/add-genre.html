@@ -1,0 +1,26 @@
+{% extends '../base.html' %}
+
+{% block title %} Add Genre {% endblock %}
+
+{% block content %}
+<style>
+#id_genreName{
+      display: block;
+      width: 100%;
+      padding: 8 px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #000;
+  }
+</style>
+<div class="container mt-5 mb-5">
+        <div class="card">
+            <h1>Add Genre</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form }}
+                <button class="btn btn-dark">Add Genre</button>
+            </form>
+        </div>
+</div>
+{% endblock %}

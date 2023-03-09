@@ -1,0 +1,62 @@
+{% extends '../base.html' %}
+
+{% block title %} Top movies {% endblock %}
+
+{% block content %}
+<style>
+    body{
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),  url("https://mobimg.b-cdn.net/v3/fetch/6c/6c7b98b7c27d9c8572ac838780c246bc.jpeg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh;
+    }
+</style>
+
+
+<div class="recommended mt-5 mb-5">
+        <div class="container">
+          {% for m in movie %}
+          {% if m.isRecomended %}
+            <div class="card">
+                <div class="card-body">
+                    <img src="{{ m.poster }}" width="20%" align="left" style="margin-right: 10px;" alt="">
+                    <h2>{{ m.movieName }}</h2>
+                    <h3>Rating: {{ m.rating }}</h3>
+                    <h3>Genre: {{ m.genre.genreName }}</h3>
+                    <p>Description: {{ m.description }}</p>
+                    <a href="{% url 'movieDetail' pk=m.pk %}" class="btn btn-dark">Watch</a>
+                </div>
+            </div>
+          {% else %}
+            <h1>Nothing</h1>
+          {% endif %}
+          {% endfor %}
+        </div>
+</div>
+<div class="top-ten">
+        <div class="container">
+            <h2 class="text-white">Top 10 movies</h2>
+            <div class="owl-carousel owl-theme">
+              {% for m in movies %}
+              {% if m.isTopTen %}
+              <div class="item">
+                <div class="card">
+                  <div class="card-body">
+                  <h2>{{ m.movieName }}</h2>
+                  <img src="{{ m.poster }}" class="mb-1 mt-1" alt="">
+                  <a href="{% url 'movieDetail' pk=m.pk %}" class="btn btn-dark">Watch</a>
+                  </div>
+                </div>
+              </div>
+              {% else %}
+                <h2>Nothing</h2>
+              {% endif %}
+              {% endfor %}
+            </div>
+            <div class="mt-3 mb-5 text-center">
+                 <a href="{% url 'allMovies' %}" class="btn btn-dark">See all</a>
+            </div>
+        </div>
+</div>
+{% endblock %}

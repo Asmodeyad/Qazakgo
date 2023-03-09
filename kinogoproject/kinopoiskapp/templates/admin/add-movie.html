@@ -1,0 +1,69 @@
+{% extends '../base.html' %}
+
+{% block title %} Add Movie {% endblock %}
+
+{% block content %}
+<style>
+#id_movieName, #id_genre, #id_producer, #id_cover, #id_poster, #id_year, #id_rating, #id_movieLink, #id_description, #id_isTopTen, #id_isRecomended, span .helptext {
+      display: block;
+      width: 100%;
+      padding: 8 px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #000;
+  }
+.btn{
+      margin: 10px;
+      }
+#circle{
+    width: 50px;
+    height: 50px;
+    background:red;
+    border-radius:50%;
+    margin-top:100px;
+    text-align: center;
+  }
+p{
+  text-align:center;
+  color:yellow;
+  }
+.bounce{
+  animation:bounce 5s linear 100;
+  }
+ @keyframes bounce{
+    0%{
+      transform:translate(0px,0px);
+
+      }
+    25%{
+       transform:translate(100px,100px);
+
+      }
+    50%{
+       transform:translate(200px,0px);
+      background:green;
+      }
+     75%{
+       transform:translate(100px,-100px);
+
+
+       }
+   100%{
+      transform:translate(0px,0px);
+
+      }
+}
+}
+</style>
+<div id="circle" class="bounce"><p> Фильм </p></div>
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <h1>Add Movie</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button class="btn btn-dark">Add Movie</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

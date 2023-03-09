@@ -1,0 +1,81 @@
+{% extends '../base.html' %}
+
+{% block title %} {{movieName}} {% endblock %}
+
+{% block content %}
+<style>
+    body{
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),  url({{ movie.cover }});
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh;
+    }
+    .grcircle {
+      width: 50px;
+      height: 50px;
+      -webkit-border-radius: 25px;
+      -moz-border-radius: 25px;
+      border-radius: 25px;
+      background: lightgreen;
+      text-align: center;
+      padding: 1%;
+    }
+    .rcircle {
+      width: 50px;
+      height: 50px;
+      -webkit-border-radius: 25px;
+      -moz-border-radius: 25px;
+      border-radius: 25px;
+      background: red;
+      text-align: center;
+      padding: 1%;
+    }
+    .ylcircle {
+      width: 50px;
+      height: 50px;
+      -webkit-border-radius: 25px;
+      -moz-border-radius: 25px;
+      border-radius: 25px;
+      background: yellow;
+      text-align: center;
+      padding: 1%;
+    }
+</style>
+<div class="container mt-5 mb-5">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div style="width: 100%;">
+                            <img src="{{ movie.poster }}" width="100%">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <h1>{{ movie.movieName }}</h1>
+                        {% if movie.rating >= 9 %}
+                        <div class="mb-1"> &#128081; </div>
+                        <p><b>{{ movie.rating }}</b></p>
+                        {% elif movie.rating >= 7 %}
+                        <div class="grcircle"> <p><b>{{ movie.rating }}</b></p> </div>
+                        {% elif movie.rating >= 4 %}
+                        <div class="ylcircle"> <p><b>{{ movie.rating }}</b></p> </div>
+                        {% else %}
+                        <div class="rcircle"> <p><b>{{ movie.rating }}</b></p> </div>
+                        {% endif %}
+                        <p>Year: <b>{{ movie.year }}</b> | Genre: <b>{{ movie.genre.genreName }}</b> | Produced by <b>{{ movie.producer }}</b></p>
+                        <p>Description: <i>{{ movie.description }}</i></p>
+                        <a href="#movie" class="btn btn-dark">Play <i class="fa-solid fa-play"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<div id="movie" class="container mb-5">
+        <div class="card">
+            <div class="card-body">
+                <iframe width="100%" height="400" src="{{ movie.movieLink }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+</div>
+{% endblock %}

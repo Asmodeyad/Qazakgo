@@ -1,0 +1,60 @@
+{% extends '../base.html' %}
+
+{% block title %} All movies {% endblock %}
+
+{% block content %}
+
+<style>
+    body{
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),  url("https://i0.wp.com/lifeatthemovies.com/wp-content/uploads/2016/07/2011.png?resize=672%2C372");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh;
+    }
+</style>
+
+ <div class="top-ten">
+        <div class="container">
+            <h2 class="mt-5 mb-5 text-white">All movies</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Search</h3>
+                            <form class="mb-4" action="{% url 'allMovies' %}">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <input type="search" name="search" class="form-control" placeholder="Film name, description">
+                                    </div>
+                                    <div class="col-3">
+                                        <button type="submit" class="btn btn-dark"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                            <h3>Genre</h3>
+                            <ul>
+                                <li><a href="{% url 'allMovies' %}" class="text-dark">All</a></li>
+                                {% for genre in genres %}
+                                <li><a href="{% url 'filterMovies' slug=genre.slug %}" class="text-dark">{{ genre.genreName }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    {% for movie in movies %}
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <img src="{{ movie.poster }}" width="20%" align="left" style="margin-right: 10px;" alt="">
+                            <h2>{{ movie.movieName }}</h2>
+                            <p> {{ movie.description|truncatewords:30 }}</p>
+                            <a href="{% url 'movieDetail' pk=movie.pk %}" class="btn btn-dark">Watch</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+ </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends '../base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+<style>
+  #id_username, #id_password {
+      display: block;
+      width: 100%;
+      padding: 8 px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #000;
+  }
+</style>
+<div class="container mt-5 mb-5">
+        <div class="card">
+            <h1>Login</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form }}
+                <button class="btn btn-dark">Login</button>
+            </form>
+        </div>
+</div>
+{% endblock %}
